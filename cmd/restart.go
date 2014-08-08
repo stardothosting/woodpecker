@@ -10,7 +10,7 @@ import (
 func NewRestartCommand() cli.Command {
 	return cli.Command{
 		Name:  "restart",
-		Usage: "restarts a build",
+		Usage: "restarts a build on the server",
 		Flags: []cli.Flag{},
 		Action: func(c *cli.Context) {
 			handle(c, restartCommandFunc)

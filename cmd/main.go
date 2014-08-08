@@ -13,6 +13,7 @@ func main() {
 	app.EnableBashCompletion = true
 
 	app.Commands = []cli.Command{
+		NewBuildCommand(),
 		NewEnableCommand(),
 		NewDisableCommand(),
 		NewRestartCommand(),
