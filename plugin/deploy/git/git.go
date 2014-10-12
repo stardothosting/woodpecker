@@ -13,7 +13,7 @@ const (
 	// Command to set the git user and email based on the
 	// individual that made the commit.
 	CmdGlobalEmail = "git config --global user.email $(git --no-pager log -1 --pretty=format:'%ae')"
-	CmdGlobalUser  = "git config --global user.name $(git --no-pager log -1 --pretty=format:'%an')"
+	CmdGlobalUser  = "git config --global user.name  $(git --no-pager log -1 --pretty=format:'%an')"
 )
 
 type Git struct {
