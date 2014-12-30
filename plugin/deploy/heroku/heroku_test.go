@@ -26,6 +26,18 @@ func Test_Heroku(t *testing.T) {
 			g.Assert(strings.Contains(out, CmdGlobalEmail)).Equal(true)
 		})
 
+		g.It("Should write token", func() {
+			b := new(buildfile.Buildfile)
+			h := Heroku{
+				App: "drone",
+				Token: "mock-token",
+			}
+
+			h.Write(b)
+			out := b.String()
+			g.Assert(strings.Contains(out, "\necho 'machine git.heroku.com login _ password mock-token' >> ~/.netrc\n")).Equal(true)
+			})
+
 		g.It("Should add remote", func() {
 			b := new(buildfile.Buildfile)
 			h := Heroku{
@@ -34,7 +46,7 @@ func Test_Heroku(t *testing.T) {
 
 			h.Write(b)
 			out := b.String()
-			g.Assert(strings.Contains(out, "\ngit remote add heroku git@heroku.com:drone.git\n")).Equal(true)
+			g.Assert(strings.Contains(out, "\ngit remote add heroku https://git.heroku.com/drone.git\n")).Equal(true)
 		})
 
 		g.It("Should push to remote", func() {
@@ -45,7 +57,7 @@ func Test_Heroku(t *testing.T) {
 
 			d.Write(b)
 			out := b.String()
-			g.Assert(strings.Contains(out, "\ngit push heroku $COMMIT:master\n")).Equal(true)
+			g.Assert(strings.Contains(out, "\ngit push heroku $COMMIT:refs/heads/master\n")).Equal(true)
 		})
 
 		g.It("Should force push to remote", func() {
@@ -59,7 +71,7 @@ func Test_Heroku(t *testing.T) {
 			out := b.String()
 			g.Assert(strings.Contains(out, "\ngit add -A\n")).Equal(true)
 			g.Assert(strings.Contains(out, "\ngit commit -m 'adding build artifacts'\n")).Equal(true)
-			g.Assert(strings.Contains(out, "\ngit push heroku HEAD:master --force\n")).Equal(true)
+			g.Assert(strings.Contains(out, "\ngit push heroku HEAD:refs/heads/master --force\n")).Equal(true)
 		})
 
 	})
