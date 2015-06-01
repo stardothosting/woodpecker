@@ -12,9 +12,7 @@
 		<a ng-href="/{{ repo.full_name }}" class="icon icon-home"></a>
 		<a ng-href="/{{ repo.full_name }}">{{ repo.owner }} / {{ repo.name }}</a>
 		<span class="spacer"></span>
-		<a ng-href="/{{ repo.full_name }}/{{ build.sequence }}">{{ build.sequence }}</a>
-		<span class="spacer"></span>
-		<a href="#">{{ task.sequence }}</a>
+		<a ng-href="#">{{ build.sequence }}</a>
 	</div>
 
 	<div class="menu">
@@ -29,7 +27,6 @@
 
 
 	<article>
-
 			<section class="commit-section">
 					<div class="commit-status">
 						<div class="status {{ task.state }}" ng-if="task"></div>
@@ -43,17 +40,13 @@
 						<span class="octicon octicon-git-commit">{{ build.sha.substr(0,8) }}</span>
 						<span class="octicon octicon-git-branch">{{ build.branch }}</span>
 						<span class="octicon octicon-clock" style="background:#FFF;">{{ build.duration | toDuration }} duration</span>
-
-
 					</div>
+			</section>
 
-				</section>
-
-			<section ng-if="build.builds.length > 1">
-
+			<section>
 				<a class="row build-row sub-build-row" ng-repeat="task in build.builds" ng-href="{{ repo.full_name }}/{{ build.sequence }}/{{ task.sequence }}">
 					<div>
-						<div ng-class="[ 'build-num', build.state ]">{{task.sequence}}</div>
+						<div ng-class="[ 'build-num', build.state ]"></div>
 					</div>
 					<div>
 						<h3>
@@ -61,19 +54,10 @@
 								{{ key.toUpperCase() }}={{ value }}
 							</div>
 						</h3>
+						<div style="position:absolute;top:30px;right:30px;color:#CCC;"># {{task.sequence}}</div>
 					</div>
 				</a>
-
-
-
-
 			</section>
-
-			<pre id="term" ng-if="task && task.state !== 'pending'"></pre>
-
-
-
-			<button class="fab" ng-if="build.state === 'running'" ng-click="tail()"></button>
 	</article>
 
 
