@@ -36,6 +36,7 @@ var index = map[string]string{
 	"repo-update-counter":         repoUpdateCounter,
 	"repo-find-user":              repoFindUser,
 	"repo-insert-ignore":          repoInsertIgnore,
+	"repo-delete":                 repoDelete,
 	"secret-find-repo":            secretFindRepo,
 	"secret-find-repo-name":       secretFindRepoName,
 	"secret-delete":               secretDelete,
@@ -225,7 +226,7 @@ WHERE perm_user_id = ?
 `
 
 var permsInsertReplace = `
-INSERT OR REPLACE INTO perms (
+REPLACE INTO perms (
  perm_user_id
 ,perm_repo_id
 ,perm_pull
@@ -236,7 +237,7 @@ INSERT OR REPLACE INTO perms (
 `
 
 var permsInsertReplaceLookup = `
-INSERT OR REPLACE INTO perms (
+REPLACE INTO perms (
  perm_user_id
 ,perm_repo_id
 ,perm_pull
@@ -443,6 +444,10 @@ INSERT OR IGNORE INTO repos (
 ,repo_visibility
 ,repo_counter
 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+`
+
+var repoDelete = `
+DELETE FROM repos WHERE repo_id = ?
 `
 
 var secretFindRepo = `

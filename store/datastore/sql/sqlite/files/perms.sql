@@ -25,7 +25,7 @@ WHERE perm_user_id = ?
 
 -- name: perms-insert-replace
 
-INSERT OR REPLACE INTO perms (
+REPLACE INTO perms (
  perm_user_id
 ,perm_repo_id
 ,perm_pull
@@ -36,7 +36,7 @@ INSERT OR REPLACE INTO perms (
 
 -- name: perms-insert-replace-lookup
 
-INSERT OR REPLACE INTO perms (
+REPLACE INTO perms (
  perm_user_id
 ,perm_repo_id
 ,perm_pull
