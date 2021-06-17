@@ -33,6 +33,8 @@ import (
 type Opts struct {
 	URL         string // Gitea server url.
 	Context     string // Context to display in status check
+	Client      string // OAuth2 Client ID
+	Secret      string // OAuth2 Client Secret
 	Username    string // Optional machine account username.
 	Password    string // Optional machine account password.
 	PrivateMode bool   // Gitea is running in private mode.
